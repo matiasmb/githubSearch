@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">GitHubSearch</string>
+    <string name="add_repos_title">Search Github Repos</string>
+    <string name="search">Search</string>
+    <string name="error_searching_for_repos">Search and Add Repos</string>
+</resources>
