@@ -1,4 +1,4 @@
-package com.example.githubsearch.presentation.model
+package com.matiasmb.githubsearch.presentation.model
 
 sealed class ItemView {
     class ViewRepo(val name: String, val url: String) : ItemView()

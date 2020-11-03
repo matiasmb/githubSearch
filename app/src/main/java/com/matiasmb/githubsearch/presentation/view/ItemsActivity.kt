@@ -1,5 +1,7 @@
-package com.example.githubsearch.presentation.view
+package com.matiasmb.githubsearch.presentation.view
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.View
@@ -7,17 +9,18 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
 import com.brandongogetap.stickyheaders.StickyLayoutManager
-import com.example.githubsearch.R
-import com.example.githubsearch.presentation.adapter.ItemsAdapter
-import com.example.githubsearch.presentation.model.ItemView
-import com.example.githubsearch.presentation.model.ItemsStateScreen
-import com.example.githubsearch.presentation.viewmodel.ItemsViewModel
 import com.google.android.material.snackbar.Snackbar
+import com.matiasmb.githubsearch.R
+import com.matiasmb.githubsearch.presentation.adapter.ItemClickedListener
+import com.matiasmb.githubsearch.presentation.adapter.ItemsAdapter
+import com.matiasmb.githubsearch.presentation.model.ItemView
+import com.matiasmb.githubsearch.presentation.model.ItemsStateScreen
+import com.matiasmb.githubsearch.presentation.viewmodel.ItemsViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class ItemsActivity : AppCompatActivity() {
+class ItemsActivity : AppCompatActivity(), ItemClickedListener {
 
     private val viewModel: ItemsViewModel by viewModel()
 
@@ -76,7 +79,7 @@ class ItemsActivity : AppCompatActivity() {
     }
 
     private fun loadRepoList(repoList: ArrayList<ItemView>) {
-        val itemsAdapter = ItemsAdapter(repoList, this)
+        val itemsAdapter = ItemsAdapter(repoList, context = this, itemClickedListener = this)
         list_item.apply {
             adapter = itemsAdapter
             setHasFixedSize(true)
@@ -84,5 +87,11 @@ class ItemsActivity : AppCompatActivity() {
             stickyLayoutManager.elevateHeaders(true)
             layoutManager = stickyLayoutManager
         }
+    }
+
+    override fun onItemClicked(url: String) {
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.data = Uri.parse(url)
+        startActivity(intent)
     }
 }

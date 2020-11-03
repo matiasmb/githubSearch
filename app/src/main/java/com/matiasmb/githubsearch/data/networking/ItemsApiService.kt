@@ -1,8 +1,8 @@
-package com.example.githubsearch.data.networking
+package com.matiasmb.githubsearch.data.networking
 
 import retrofit2.Callback
 
-interface ItemsApiService<T>: Callback<T> {
+interface ItemsApiService<T> : Callback<T> {
 
     interface ItemsApiServiceCallback<T> {
         fun onSuccess(response: T)

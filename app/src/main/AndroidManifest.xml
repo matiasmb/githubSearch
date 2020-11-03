@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.githubsearch">
+    package="com.matiasmb.githubsearch">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -11,8 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:name="com.example.githubsearch.Application">
-        <activity android:name="com.example.githubsearch.presentation.view.ItemsActivity">
+        android:name="com.matiasmb.githubsearch.Application">
+        <activity android:name="com.matiasmb.githubsearch.presentation.view.ItemsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

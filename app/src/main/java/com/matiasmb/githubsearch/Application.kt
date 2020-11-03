@@ -1,14 +1,14 @@
-package com.example.githubsearch
+package com.matiasmb.githubsearch
 
 import android.app.Application
-import com.example.githubsearch.data.model.GithubRepo
-import com.example.githubsearch.data.networking.ItemsApiClient
-import com.example.githubsearch.data.networking.ItemsApiService
-import com.example.githubsearch.data.networking.ItemsApiServiceImpl
-import com.example.githubsearch.domain.DomainInteractor
-import com.example.githubsearch.domain.DomainInteractorImpl
-import com.example.githubsearch.presentation.viewmodel.ItemsViewModel
 import com.google.gson.GsonBuilder
+import com.matiasmb.githubsearch.data.model.GithubRepo
+import com.matiasmb.githubsearch.data.networking.ItemsApiClient
+import com.matiasmb.githubsearch.data.networking.ItemsApiService
+import com.matiasmb.githubsearch.data.networking.ItemsApiServiceImpl
+import com.matiasmb.githubsearch.domain.DomainInteractor
+import com.matiasmb.githubsearch.domain.DomainInteractorImpl
+import com.matiasmb.githubsearch.presentation.viewmodel.ItemsViewModel
 import okhttp3.OkHttpClient
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidFileProperties

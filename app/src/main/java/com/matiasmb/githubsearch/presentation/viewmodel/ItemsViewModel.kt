@@ -1,11 +1,11 @@
-package com.example.githubsearch.presentation.viewmodel
+package com.matiasmb.githubsearch.presentation.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.githubsearch.domain.DomainInteractor
-import com.example.githubsearch.presentation.model.ItemView
-import com.example.githubsearch.presentation.model.ItemsStateScreen
+import com.matiasmb.githubsearch.domain.DomainInteractor
+import com.matiasmb.githubsearch.presentation.model.ItemView
+import com.matiasmb.githubsearch.presentation.model.ItemsStateScreen
 
 class ItemsViewModel(private val domainInteractor: DomainInteractor) : ViewModel(),
     DomainInteractor.CallbackSearch {

@@ -1,4 +1,4 @@
-package com.example.githubsearch.presentation.adapter
+package com.matiasmb.githubsearch.presentation.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -7,13 +7,17 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.RecyclerView
 import com.brandongogetap.stickyheaders.exposed.StickyHeaderHandler
-import com.example.githubsearch.R
-import com.example.githubsearch.presentation.adapter.holder.BaseItemViewHolder
-import com.example.githubsearch.presentation.adapter.holder.ItemHeaderViewHolder
-import com.example.githubsearch.presentation.adapter.holder.ItemViewHolder
-import com.example.githubsearch.presentation.model.ItemView
+import com.matiasmb.githubsearch.R
+import com.matiasmb.githubsearch.presentation.adapter.holder.BaseItemViewHolder
+import com.matiasmb.githubsearch.presentation.adapter.holder.ItemHeaderViewHolder
+import com.matiasmb.githubsearch.presentation.adapter.holder.ItemViewHolder
+import com.matiasmb.githubsearch.presentation.model.ItemView
 
-class ItemsAdapter(private val items: ArrayList<ItemView>, private val context: Context) :
+class ItemsAdapter(
+    private val items: ArrayList<ItemView>,
+    private val context: Context,
+    private val itemClickedListener: ItemClickedListener
+) :
     RecyclerView.Adapter<BaseItemViewHolder>(), StickyHeaderHandler {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseItemViewHolder {
@@ -37,13 +41,15 @@ class ItemsAdapter(private val items: ArrayList<ItemView>, private val context: 
             is ItemView.ViewRepo -> {
                 (holder as ItemViewHolder).onBindViewHolder(
                     (items[position] as ItemView.ViewRepo).name,
-                    (items[position] as ItemView.ViewRepo).url
+                    (items[position] as ItemView.ViewRepo).url,
+                    itemClickedListener
                 )
             }
             is ItemView.ViewUserHeader -> {
                 (holder as ItemHeaderViewHolder).onBindViewHolder(
                     (items[position] as ItemView.ViewUserHeader).name,
-                    (items[position] as ItemView.ViewUserHeader).url
+                    (items[position] as ItemView.ViewUserHeader).url,
+                    itemClickedListener
                 )
             }
         }

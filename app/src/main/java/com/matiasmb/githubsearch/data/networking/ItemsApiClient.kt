@@ -1,6 +1,6 @@
-package com.example.githubsearch.data.networking
+package com.matiasmb.githubsearch.data.networking
 
-import com.example.githubsearch.data.model.GithubRepo
+import com.matiasmb.githubsearch.data.model.GithubRepo
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Headers

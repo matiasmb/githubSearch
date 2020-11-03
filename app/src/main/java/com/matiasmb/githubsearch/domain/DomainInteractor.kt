@@ -1,6 +1,6 @@
-package com.example.githubsearch.domain
+package com.matiasmb.githubsearch.domain
 
-import com.example.githubsearch.presentation.model.ItemView
+import com.matiasmb.githubsearch.presentation.model.ItemView
 
 interface DomainInteractor {
 

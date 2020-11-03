@@ -1,8 +1,8 @@
-package com.example.githubsearch.domain
+package com.matiasmb.githubsearch.domain
 
-import com.example.githubsearch.data.model.GithubRepo
-import com.example.githubsearch.data.networking.ItemsApiService
-import com.example.githubsearch.presentation.model.ItemView
+import com.matiasmb.githubsearch.data.model.GithubRepo
+import com.matiasmb.githubsearch.data.networking.ItemsApiService
+import com.matiasmb.githubsearch.presentation.model.ItemView
 
 class DomainInteractorImpl(
     private val itemsApiService: ItemsApiService<List<GithubRepo>>
@@ -26,7 +26,7 @@ class DomainInteractorImpl(
 
     override fun onSuccess(response: List<GithubRepo>) {
         val responseListView: ArrayList<ItemView> = ArrayList()
-        responseListView.add(ItemView.ViewUserHeader(name, ""))
+        responseListView.add(ItemView.ViewUserHeader(name, BASE_URL + name))
         response.forEach { githubRepo ->
             responseListView.add(ItemView.ViewRepo(githubRepo.name, githubRepo.url))
         }
@@ -37,4 +37,7 @@ class DomainInteractorImpl(
         callbackSearch.onSearchFailure()
     }
 
+    private companion object {
+        const val BASE_URL = "https://github.com/"
+    }
 }

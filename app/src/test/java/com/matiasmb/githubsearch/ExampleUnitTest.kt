@@ -1,4 +1,4 @@
-package com.example.githubsearch
+package com.matiasmb.githubsearch
 
 import org.junit.Test
 
