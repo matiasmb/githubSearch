@@ -43,6 +43,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.2.1'
     implementation "com.brandongogetap:stickyheaders:0.5.1"
     implementation "de.hdodenhof:circleimageview:3.1.0"
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
 
     testImplementation "org.koin:koin-test:2.1.5"
     testImplementation 'junit:junit:4.13'

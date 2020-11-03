@@ -3,9 +3,11 @@ package com.matiasmb.githubsearch.presentation.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.matiasmb.githubsearch.domain.DomainInteractor
 import com.matiasmb.githubsearch.presentation.model.ItemView
 import com.matiasmb.githubsearch.presentation.model.ItemsStateScreen
+import kotlinx.coroutines.launch
 
 class ItemsViewModel(private val domainInteractor: DomainInteractor) : ViewModel(),
     DomainInteractor.CallbackSearch {
@@ -18,7 +20,9 @@ class ItemsViewModel(private val domainInteractor: DomainInteractor) : ViewModel
     }
 
     fun fetchItems(query: String) {
-        domainInteractor.performSearch(query)
+        viewModelScope.launch {
+            domainInteractor.performSearch(query)
+        }
     }
 
     override fun onSearchComplete(response: ArrayList<ItemView>) {

@@ -9,6 +9,6 @@ interface DomainInteractor {
         fun onSearchFailure()
     }
 
-    fun performSearch(query: String)
+    suspend fun performSearch(query: String)
     fun setCallbackSearch(callbackSearch: CallbackSearch)
 }

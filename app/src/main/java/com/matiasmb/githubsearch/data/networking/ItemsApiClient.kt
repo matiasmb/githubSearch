@@ -1,6 +1,7 @@
 package com.matiasmb.githubsearch.data.networking
 
 import com.matiasmb.githubsearch.data.model.GithubRepo
+import kotlinx.coroutines.Deferred
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Headers
@@ -16,5 +17,5 @@ interface ItemsApiClient {
      */
     @Headers("User-Agent: GitHubMVP-App")
     @GET("users/{username}/repos")
-    fun searchReposByUsername(@Path("username") username: String?): Call<List<GithubRepo>>
+    suspend fun searchReposByUsername(@Path("username") username: String): List<GithubRepo>
 }

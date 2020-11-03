@@ -6,34 +6,21 @@ import com.matiasmb.githubsearch.presentation.model.ItemView
 
 class DomainInteractorImpl(
     private val itemsApiService: ItemsApiService<List<GithubRepo>>
-) : DomainInteractor, ItemsApiService.ItemsApiServiceCallback<List<GithubRepo>> {
+) : DomainInteractor {
 
     private lateinit var callbackSearch: DomainInteractor.CallbackSearch
-    private lateinit var name: String
 
-    init {
-        itemsApiService.setItemsApiServiceCallback(this)
-    }
-
-    override fun performSearch(query: String) {
-        name = query
-        itemsApiService.getPostFromReddit(query)
-    }
-
-    override fun setCallbackSearch(callbackSearch: DomainInteractor.CallbackSearch) {
-        this.callbackSearch = callbackSearch
-    }
-
-    override fun onSuccess(response: List<GithubRepo>) {
+    override suspend fun performSearch(query: String) {
+        val response = itemsApiService.getReposByUsername(query)
         val responseListView: ArrayList<ItemView> = ArrayList()
-        responseListView.add(ItemView.ViewUserHeader(name))
+        responseListView.add(ItemView.ViewUserHeader(query))
         response.forEach { githubRepo ->
             responseListView.add(ItemView.ViewRepo(githubRepo.name, githubRepo.url))
         }
         callbackSearch.onSearchComplete(responseListView)
     }
 
-    override fun onError() {
-        callbackSearch.onSearchFailure()
+    override fun setCallbackSearch(callbackSearch: DomainInteractor.CallbackSearch) {
+        this.callbackSearch = callbackSearch
     }
 }
