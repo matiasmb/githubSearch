@@ -1,13 +1,18 @@
 package com.matiasmb.githubsearch.presentation.adapter.holder
 
 import android.view.View
+import androidx.recyclerview.widget.RecyclerView
 import com.matiasmb.githubsearch.presentation.adapter.ItemClickedListener
 import kotlinx.android.synthetic.main.sticky_header.view.*
 
-class ItemHeaderViewHolder(itemView: View) :  BaseItemViewHolder(itemView) {
+class ItemHeaderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    override fun onBindViewHolder(name: String, url: String, itemClickedListener: ItemClickedListener) {
+    fun onBindViewHolder(name: String, itemClickedListener: ItemClickedListener) {
         itemView.username.text = name
-        itemView.header_card_layout.setOnClickListener { itemClickedListener.onItemClicked(url) }
+        itemView.header_card_layout.setOnClickListener { itemClickedListener.onItemClicked(BASE_URL + name) }
+    }
+
+    private companion object {
+        const val BASE_URL = "https://github.com/"
     }
 }

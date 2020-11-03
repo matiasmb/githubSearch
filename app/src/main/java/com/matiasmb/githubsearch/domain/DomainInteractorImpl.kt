@@ -26,7 +26,7 @@ class DomainInteractorImpl(
 
     override fun onSuccess(response: List<GithubRepo>) {
         val responseListView: ArrayList<ItemView> = ArrayList()
-        responseListView.add(ItemView.ViewUserHeader(name, BASE_URL + name))
+        responseListView.add(ItemView.ViewUserHeader(name))
         response.forEach { githubRepo ->
             responseListView.add(ItemView.ViewRepo(githubRepo.name, githubRepo.url))
         }
@@ -35,9 +35,5 @@ class DomainInteractorImpl(
 
     override fun onError() {
         callbackSearch.onSearchFailure()
-    }
-
-    private companion object {
-        const val BASE_URL = "https://github.com/"
     }
 }

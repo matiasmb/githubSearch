@@ -8,7 +8,6 @@ import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.RecyclerView
 import com.brandongogetap.stickyheaders.exposed.StickyHeaderHandler
 import com.matiasmb.githubsearch.R
-import com.matiasmb.githubsearch.presentation.adapter.holder.BaseItemViewHolder
 import com.matiasmb.githubsearch.presentation.adapter.holder.ItemHeaderViewHolder
 import com.matiasmb.githubsearch.presentation.adapter.holder.ItemViewHolder
 import com.matiasmb.githubsearch.presentation.model.ItemView
@@ -18,9 +17,9 @@ class ItemsAdapter(
     private val context: Context,
     private val itemClickedListener: ItemClickedListener
 ) :
-    RecyclerView.Adapter<BaseItemViewHolder>(), StickyHeaderHandler {
+    RecyclerView.Adapter<RecyclerView.ViewHolder>(), StickyHeaderHandler {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseItemViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
             VIEW_USER_HEADER -> {
                 val view = LayoutInflater.from(parent.context)
@@ -36,7 +35,7 @@ class ItemsAdapter(
         }
     }
 
-    override fun onBindViewHolder(holder: BaseItemViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (items[position]) {
             is ItemView.ViewRepo -> {
                 (holder as ItemViewHolder).onBindViewHolder(
@@ -48,7 +47,6 @@ class ItemsAdapter(
             is ItemView.ViewUserHeader -> {
                 (holder as ItemHeaderViewHolder).onBindViewHolder(
                     (items[position] as ItemView.ViewUserHeader).name,
-                    (items[position] as ItemView.ViewUserHeader).url,
                     itemClickedListener
                 )
             }
