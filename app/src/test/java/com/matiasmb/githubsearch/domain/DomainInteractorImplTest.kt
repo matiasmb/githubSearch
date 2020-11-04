@@ -13,7 +13,6 @@ import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertTrue
 import org.junit.Test
 import org.mockito.ArgumentMatchers.anyString
-import java.net.UnknownHostException
 
 @ExperimentalCoroutinesApi
 class DomainInteractorImplTest {
