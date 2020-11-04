@@ -3,9 +3,9 @@ package com.matiasmb.githubsearch.data.networking
 import com.matiasmb.githubsearch.data.model.GithubRepo
 import com.matiasmb.githubsearch.data.model.Resource
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.flow
 
 @ExperimentalCoroutinesApi
 class ItemsApiServiceImpl(
@@ -13,15 +13,18 @@ class ItemsApiServiceImpl(
 ) : ItemsApiService {
 
     override suspend fun getReposByUsername(query: String): Flow<Resource<List<GithubRepo>>> {
-        return callbackFlow {
-            offer(
-                Resource.Success(
-                    apiClient.searchReposByUsername(query)
+        return flow {
+            apiClient.searchReposByUsername(query).takeIf { it.isNotEmpty() }?.run {
+                emit(
+                    Resource.Success(this)
                 )
-            )
-            awaitClose {
-                close()
+            } ?: run {
+                emit(
+                    Resource.Failure
+                )
             }
+        }.catch {
+            Resource.Failure
         }
     }
 }
