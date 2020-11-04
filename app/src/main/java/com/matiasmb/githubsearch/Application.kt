@@ -2,13 +2,13 @@ package com.matiasmb.githubsearch
 
 import android.app.Application
 import com.google.gson.GsonBuilder
-import com.matiasmb.githubsearch.data.model.GithubRepo
 import com.matiasmb.githubsearch.data.networking.ItemsApiClient
 import com.matiasmb.githubsearch.data.networking.ItemsApiService
 import com.matiasmb.githubsearch.data.networking.ItemsApiServiceImpl
 import com.matiasmb.githubsearch.domain.DomainInteractor
 import com.matiasmb.githubsearch.domain.DomainInteractorImpl
 import com.matiasmb.githubsearch.presentation.viewmodel.ItemsViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import okhttp3.OkHttpClient
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidFileProperties
@@ -21,6 +21,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class Application : Application() {
 
+    @ExperimentalCoroutinesApi
     private val appModule = module {
         single {
             Retrofit.Builder()
@@ -32,7 +33,7 @@ class Application : Application() {
         }
         viewModel { ItemsViewModel(get()) }
         factory<DomainInteractor> { DomainInteractorImpl(get()) }
-        factory<ItemsApiService<List<GithubRepo>>> { ItemsApiServiceImpl(get()) }
+        factory<ItemsApiService> { ItemsApiServiceImpl(get()) }
     }
 
     override fun onCreate() {

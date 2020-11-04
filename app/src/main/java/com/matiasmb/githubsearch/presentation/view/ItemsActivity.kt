@@ -8,6 +8,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
 import com.brandongogetap.stickyheaders.StickyLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.matiasmb.githubsearch.R
@@ -75,7 +76,9 @@ class ItemsActivity : AppCompatActivity(), ItemClickedListener {
             coordinator_layout,
             getString(R.string.error_searching_for_repos),
             Snackbar.LENGTH_LONG
-        ).show()
+        ).apply {
+            view.setBackgroundColor(ContextCompat.getColor(this@ItemsActivity, R.color.red))
+        }.show()
     }
 
     private fun loadRepoList(repoList: ArrayList<ItemView>) {

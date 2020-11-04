@@ -1,14 +1,10 @@
 package com.matiasmb.githubsearch.domain
 
+import com.matiasmb.githubsearch.data.model.Resource
 import com.matiasmb.githubsearch.presentation.model.ItemView
+import kotlinx.coroutines.flow.Flow
 
 interface DomainInteractor {
 
-    interface CallbackSearch {
-        fun onSearchComplete(response: ArrayList<ItemView>)
-        fun onSearchFailure()
-    }
-
-    suspend fun performSearch(query: String)
-    fun setCallbackSearch(callbackSearch: CallbackSearch)
+    suspend fun performSearch(query: String): Flow<Resource<ArrayList<ItemView>>>
 }

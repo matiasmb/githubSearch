@@ -1,6 +1,10 @@
 package com.matiasmb.githubsearch.data.networking
 
-interface ItemsApiService<T> {
+import com.matiasmb.githubsearch.data.model.GithubRepo
+import com.matiasmb.githubsearch.data.model.Resource
+import kotlinx.coroutines.flow.Flow
 
-    suspend fun getReposByUsername(query: String): T
+interface ItemsApiService {
+
+    suspend fun getReposByUsername(query: String): Flow<Resource<List<GithubRepo>>>
 }

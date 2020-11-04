@@ -1,2 +1,6 @@
-# githubSearch
-creating a demo project with basic stuff
+## GithubSearch
+
+This is an app that allow to you search in github by user name like the following gif
+
+
+![](demo.gif)
