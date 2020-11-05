@@ -4,10 +4,10 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
-import android.view.View
+import androidx.annotation.VisibleForTesting
+import androidx.annotation.VisibleForTesting.PRIVATE
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
-import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import com.brandongogetap.stickyheaders.StickyLayoutManager
 import com.google.android.material.snackbar.Snackbar
@@ -57,7 +57,8 @@ class ItemsActivity : AppCompatActivity(), ItemClickedListener {
         viewModel.stateScreen.observe(this, ::loadScreen)
     }
 
-    private fun loadScreen(itemsStateScreen: ItemsStateScreen) {
+    @VisibleForTesting(otherwise = PRIVATE)
+    fun loadScreen(itemsStateScreen: ItemsStateScreen) {
         when (itemsStateScreen) {
             is ItemsStateScreen.ShowItems -> loadRepoList(itemsStateScreen.repos)
             is ItemsStateScreen.ShowErrorLoading -> showErrorScreen()
@@ -65,7 +66,6 @@ class ItemsActivity : AppCompatActivity(), ItemClickedListener {
     }
 
     private fun setUpToolbar() {
-        val toolbar = findViewById<View>(R.id.toolbar) as Toolbar
         setSupportActionBar(toolbar)
         supportActionBar?.setTitle(R.string.add_repos_title)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -93,8 +93,8 @@ class ItemsActivity : AppCompatActivity(), ItemClickedListener {
     }
 
     override fun onItemClicked(url: String) {
-        val intent = Intent(Intent.ACTION_VIEW)
-        intent.data = Uri.parse(url)
-        startActivity(intent)
+        startActivity(getItemIntent(url))
     }
+
+    fun getItemIntent(url: String) = Intent(Intent.ACTION_VIEW).setData(Uri.parse(url))
 }

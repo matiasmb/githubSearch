@@ -6,13 +6,14 @@ import com.matiasmb.githubsearch.presentation.model.ItemView
 import kotlinx.coroutines.flow.flow
 
 object TestData {
+    val arrayDataList = arrayListOf(
+        ItemView.ViewUserHeader("google"),
+        ItemView.ViewRepo("kotlin", "https://github.com/test"),
+    )
     val dataList = flow {
         emit(
             Resource.Success(
-                arrayListOf(
-                    ItemView.ViewUserHeader("google"),
-                    ItemView.ViewRepo("kotlin", "https://github.com/test"),
-                )
+                arrayDataList
             )
         )
     }
