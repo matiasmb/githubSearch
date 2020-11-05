@@ -1,21 +1,25 @@
 package com.matiasmb.githubsearch.presentation.view
 
 import android.content.Intent
+import android.os.Build
 import com.matiasmb.githubsearch.TestData.arrayDataList
 import com.matiasmb.githubsearch.presentation.model.ItemsStateScreen
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.koin.test.KoinTest
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
+@ExperimentalCoroutinesApi
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [28])
-class ItemsActivityTest {
+@Config(sdk = [Build.VERSION_CODES.P])
+class ItemsActivityTest : KoinTest {
 
     private lateinit var shadowActivity: ItemsActivity
 

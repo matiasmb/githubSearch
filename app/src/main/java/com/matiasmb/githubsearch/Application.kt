@@ -15,13 +15,14 @@ import org.koin.android.ext.koin.androidFileProperties
 import org.koin.android.ext.koin.androidLogger
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.context.startKoin
+import org.koin.core.context.stopKoin
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+@ExperimentalCoroutinesApi
 class Application : Application() {
 
-    @ExperimentalCoroutinesApi
     private val appModule = module {
         single {
             Retrofit.Builder()
@@ -38,7 +39,7 @@ class Application : Application() {
 
     override fun onCreate() {
         super.onCreate()
-
+        stopKoin()
         startKoin {
             // use AndroidLogger as Koin Logger - default Level.INFO
             androidLogger()
