@@ -8,6 +8,7 @@ import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.RecyclerView
 import com.brandongogetap.stickyheaders.exposed.StickyHeaderHandler
 import com.matiasmb.githubsearch.R
+import com.matiasmb.githubsearch.presentation.adapter.holder.BaseViewHolder
 import com.matiasmb.githubsearch.presentation.adapter.holder.ItemHeaderViewHolder
 import com.matiasmb.githubsearch.presentation.adapter.holder.ItemViewHolder
 import com.matiasmb.githubsearch.presentation.model.ItemView
@@ -17,9 +18,9 @@ class ItemsAdapter(
     private val context: Context,
     private val itemClickedListener: ItemClickedListener
 ) :
-    RecyclerView.Adapter<RecyclerView.ViewHolder>(), StickyHeaderHandler {
+    RecyclerView.Adapter<BaseViewHolder>(), StickyHeaderHandler {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
         return when (viewType) {
             VIEW_USER_HEADER -> {
                 val view = LayoutInflater.from(parent.context)
@@ -35,22 +36,8 @@ class ItemsAdapter(
         }
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        when (items[position]) {
-            is ItemView.ViewRepo -> {
-                (holder as ItemViewHolder).onBindViewHolder(
-                    (items[position] as ItemView.ViewRepo).name,
-                    (items[position] as ItemView.ViewRepo).url,
-                    itemClickedListener
-                )
-            }
-            is ItemView.ViewUserHeader -> {
-                (holder as ItemHeaderViewHolder).onBindViewHolder(
-                    (items[position] as ItemView.ViewUserHeader).name,
-                    itemClickedListener
-                )
-            }
-        }
+    override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
+        holder.onBindViewHolder(items[position], itemClickedListener)
         setAnimation(holder.itemView)
     }
 

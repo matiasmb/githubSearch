@@ -1,18 +1,18 @@
 package com.matiasmb.githubsearch.presentation.adapter.holder
 
 import android.view.View
-import androidx.recyclerview.widget.RecyclerView
 import com.matiasmb.githubsearch.presentation.adapter.ItemClickedListener
+import com.matiasmb.githubsearch.presentation.model.ItemView
 import kotlinx.android.synthetic.main.item_repo.view.*
 
-class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class ItemViewHolder(itemView: View) : BaseViewHolder(itemView) {
 
-    fun onBindViewHolder(
-        name: String,
-        url: String,
+    override fun onBindViewHolder(
+        data: ItemView,
         itemClickedListener: ItemClickedListener
     ) {
-        itemView.repo_name.text = name
-        itemView.card_layout.setOnClickListener { itemClickedListener.onItemClicked(url) }
+        val holderData = data as ItemView.ViewRepo
+        itemView.repo_name.text = holderData.name
+        itemView.card_layout.setOnClickListener { itemClickedListener.onItemClicked(holderData.url) }
     }
 }
